@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Next.js Interview Questions & Answers (Up to Dynamic Routing)
 
-## Getting Started
+### 1. What is Next.js?
+**Answer:**  
+Next.js is a React framework for building server-side rendered and statically generated web applications.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 2. How do you start a Next.js development server?
+**Answer:**  
+Run `npm run dev` or `yarn dev` in your project directory.
+
+---
+
+### 3. Where do you define routes in Next.js?
+**Answer:**  
+Routes are defined by the file and folder structure inside the `pages` or `app` directory.
+
+---
+
+### 4. How do you create a static page in Next.js?
+**Answer:**  
+Add a file like `app/about-us/page.js`:
+```js
+// filepath: app/about-us/page.js
+export default function AboutUs() {
+  return <h1>About Us</h1>;
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 5. How do you navigate between pages?
+**Answer:**  
+Use the `Link` component from `next/link`:
+```js
+import Link from "next/link";
+<Link href="/about-us">About Us</Link>
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### 6. How do you create nested routes?
+**Answer:**  
+Create folders inside the `app` directory. For example, `app/services/web-development/page.js` creates `/services/web-development`.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 7. How do you implement dynamic routing?
+**Answer:**  
+Use square brackets for folder names, e.g., `app/blogs/[blogID]/page.js` for `/blogs/:blogID`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### 8. How do you access dynamic route parameters?
+**Answer:**  
+In the page component, use the `params` prop:
+```js
+// filepath: app/blogs/[blogID]/page.js
+const Blog = ({ params }) => <h1>Blog {params.blogID}</h1>;
+export default Blog;
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 9. What is the difference between static and dynamic routing in Next.js?
+**Answer:**  
+Static routing uses fixed file paths for routes. Dynamic routing uses bracket notation (`[param]`) to capture variable segments in the URL.
+
+---
+
+### 10. How do you create a catch-all route?
+**Answer:**  
+Use double brackets: `app/blogs/[...slug]/page.js` for `/blogs/*
