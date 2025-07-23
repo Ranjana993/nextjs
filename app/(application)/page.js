@@ -1,10 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
+import Button from "../_components/Button";
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center w-full">
-      <h1 className="text-3xl bg-red-400 text-white w-full text-center py-4">Welcome to the Nextjs World </h1>
+      <h1 className="text-3xl w-full text-center py-4">Welcome to the Nextjs World </h1>
+      <Button/>
       <ul className="mt-6  flex items-start justify-between gap-5">
         <li>
           <Link href={"/about-us"}>About Us</Link>

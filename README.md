@@ -72,3 +72,119 @@ Static routing uses fixed file paths for routes. Dynamic routing uses bracket no
 ### 10. How do you create a catch-all route?
 **Answer:**  
 Use double brackets: `app/blogs/[...slug]/page.js` for `/blogs/*
+
+### 11. How do you create a catch-all route in Next.js?
+**Answer:**  
+Use triple dots in square brackets:  
+`app/blogs/[...slug]/page.js`  
+This matches `/blogs/a`, `/blogs/a/b`, etc.
+
+```js
+// filepath: app/blogs/[...slug]/page.js
+export default function BlogCatchAll({ params }) {
+  return <div>Slug: {params.slug?.join('/')}</div>;
+}
+```
+
+---
+
+### 12. How do you create an optional catch-all route?
+**Answer:**  
+Use double brackets with triple dots:  
+`app/blogs/[[...slug]]/page.js`  
+This matches `/blogs`, `/blogs/a`, `/blogs/a/b`, etc.
+
+```js
+// filepath: app/blogs/[[...slug]]/page.js
+export default function BlogOptionalCatchAll({ params }) {
+  return <div>Slug: {params.slug ? params.slug.join('/') : 'No slug'}</div>;
+}
+```
+
+---
+
+### 13. What is shallow routing in Next.js?
+**Answer:**  
+Shallow routing allows you to change the URL without running data fetching methods again (like `getServerSideProps`).  
+Use the `shallow` option with `router.push` or `router.replace`.
+
+```js
+import { useRouter } from 'next/navigation';
+
+const router = useRouter();
+router.push('/about-us', undefined, { shallow: true });
+```
+
+---
+
+### 14. How do you programmatically navigate in Next.js?
+**Answer:**  
+Use the `useRouter` hook from `next/navigation` (app directory) or `next/router` (pages directory):
+
+```js
+import { useRouter } from 'next/navigation';
+
+const router = useRouter();
+router.push('/services');
+```
+
+---
+
+### 15. What is route interception in Next.js?
+**Answer:**  
+Route interception allows you to override or intercept navigation to a route using special markers like `(.)`, `(..)`, `(..)(..)`, and `(...)` in the folder name.  
+Example:  
+- `app/(dashboard)/feed/(.)profile/page.js` intercepts `/feed/profile` from `/dashboard`.
+
+---
+
+### 16. How do you handle 404 pages in Next.js?
+**Answer:**  
+Create a `not-found.js` file in the `app` directory:
+
+```js
+// filepath: app/not-found.js
+export default function NotFound() {
+  return <h1>404 - Page Not Found</h1>;
+}
+```
+
+---
+
+### 17. How do you create custom error pages?
+**Answer:**  
+Create an `error.js` file in the `app` directory:
+
+```js
+// filepath: app/error.js
+export default function Error({ error }) {
+  return <h1>Error: {error.message}</h1>;
+}
+```
+
+---
+
+### 18. How do you add route groups in Next.js?
+**Answer:**  
+Use parentheses in folder names to group routes without affecting the URL.  
+Example: `app/(admin)/dashboard/page.js` is accessible at `/dashboard`.
+
+---
+
+### 19. How do you use middleware for routing?
+**Answer:**  
+Add a `middleware.js` file at the root or in a folder to run code before a request is completed (e.g., authentication, redirects).
+
+```js
+// filepath: middleware.js
+import { NextResponse } from 'next/server';
+
+export function middleware(request) {
+  // Example: redirect unauthenticated users
+  return NextResponse.next();
+}
+```
+
+---
+
+For more advanced routing topics, see the [Next.js Routing Docs](https://nextjs.org/docs/app/building-your-application/routing)
